@@ -72,12 +72,13 @@ body {
     text-align: center;
     font-size: 80%;
     padding: 10px;
+    margin:10px;
   }
   
   section {
     background: #FFE521;
     width: 75%;
-    font-size: 90%;
+    font-size: 100%;
     display: inline-block;
     vertical-align: top;
   }
@@ -87,7 +88,7 @@ body {
   }
   
   select {
-    font-size: 90%;
+    font-size: 100%;
     display: inline-block;
     border-radius: 5px;
     height: 25px;
@@ -95,7 +96,11 @@ body {
   }
   
   .output {
+<<<<<<< HEAD
     background: #B2BABB; /*acá iba el #333333*/
+=======
+    background: #eee9e9;
+>>>>>>> refs/remotes/origin/master
     font-size: 90%;
     display: inline-block;
     width: 100%;
@@ -115,42 +120,3 @@ body {
     height: 4%;
     width: 100%;
   }
-
-/*Código de Karina*{
- margin: 0px;
- padding:0px;
- font-family: verdana;
-
-}
-divmenu{
-    position: absolute;
-    padding:170px;
-    height: 100%;
-    background-color:#2f3030;
-}
-
-div#logo-principal{
-    width: 40px;
-    height: 40px;
-    margin: 10px;
-    background-image: url();
-}
-
-header {
-    text-align: center;
-    padding: 50px;
-    background: rgb(248, 248, 155);
-}
-
-tbody{
-background: #f7eecd;
-margin:0;
-}
-select{
-   border-radius: 5px ;
- 
-}
-body{
-    margin:0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif 
-} */
