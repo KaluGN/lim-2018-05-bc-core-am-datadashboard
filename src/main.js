@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-/* let cboUsers = document.getElementById('cboUsers');
-=======
 //Codigo a Ejecutar al Cargar la Pagina
 function myOnLoad() {
  cargarSedes();
@@ -29,7 +26,6 @@ function addOptions(domElement, array) {
 }
 
 let cboUsers = document.getElementById('cboUsers');
->>>>>>> refs/remotes/origin/master
 cboUsers.addEventListener("change", function () {
     getProgress();
 });
@@ -102,9 +98,6 @@ function getProgress() {
             }
             for (let i in arrayUnits) {
 
-<<<<<<< HEAD
- */
-=======
                 console.log(i);
                 let fila = "<tr><td>" + i + "</td><td>" + arrayUnits[i].completedParts + "</td></tr>";
                 let btn = document.createElement("TR");
@@ -122,4 +115,3 @@ function getProgress() {
     xhttp.open("GET", "../data/cohorts/lim-2018-03-pre-core-pw/progress.json", true);
     xhttp.send();
 };
->>>>>>> refs/remotes/origin/master
