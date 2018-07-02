@@ -11,7 +11,7 @@
 
 <body>
   <header>
-    <img src="http://v.fastcdn.co/t/cf943cfe/5519e61e/1527645394-27418802-257x33-Laboratoria-Logo-RGB.png" class=h eader-image
+    <img src="img/logo-laboratoria.png" class=header-image
       alt="logo">
   </header>
   <!--<hr>-->
@@ -31,13 +31,36 @@
         <p>Sede:</p>
         <select></select>
         <p>Cohort:</p>
-        <select id="cboCohorts"></select>
+        <select id="cboCohorts"></select>  
       </div>
-      <div class=output>aquí va la info general</div>
+      <div class=output>
+        <div id="cohort">Selecciona Alumna</div> <!--cambiar -->
+      <br>
+      <select id="cboUsers"> </select> <!--cambiar -->
+      <br>
+      <br>
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Unidad</th>
+            <br>
+            <br>
+            <th scope="col">Progreso</th>
+          </tr>
+        </thead>
+        <tbody id="progressTable"> <!--cambiar -->
+
+        </tbody>
+        <div class="container">
+            <div id="resultado"></div>
+        </div>
+      </table>
+      </div>
     </section>
   </main>
-  <script src="main.js"></script>
-  <script src="data.js"></script> 
+    <script src="data.js"></script>
+    <script src="pruebaMain.js"></script>
+    <script src="main.js"></script>
   <footer>Realizado por el equipo doble K</footer>
 </body>
 </html>

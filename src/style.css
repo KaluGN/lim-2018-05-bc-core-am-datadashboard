@@ -18,9 +18,9 @@ body {
   header {
    text-align: center;
    background-color: #FFFFFF;
-   padding: 15px;
+   padding: 16px;
    border-bottom: 1px solid #333333;
-  }
+     }
   
   .header-image {
     width: 180px; 
@@ -95,10 +95,11 @@ body {
   }
   
   .output {
-    background: #333333;
+    background: #B2BABB; /*acá iba el #333333*/
     font-size: 90%;
     display: inline-block;
     width: 100%;
+    height:60%;
     padding-bottom: 75%; 
   }
   

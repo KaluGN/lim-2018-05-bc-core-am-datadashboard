@@ -1,4 +1,4 @@
-let cboUsers = document.getElementById('cboUsers');
+/* let cboUsers = document.getElementById('cboUsers');
 cboUsers.addEventListener("change", function () {
   getProgress();
 });
@@ -65,3 +65,4 @@ function getProgress() {
   xhttp.send();
 };
 
+ */
