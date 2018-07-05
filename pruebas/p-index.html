@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Data dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="p-style.css" />
+</head>
+
+<body>
+  <header class="header">
+    <div>
+      <img class=logo src="http://v.fastcdn.co/t/cf943cfe/5519e61e/1527645394-27418802-257x33-Laboratoria-Logo-RGB.png" alt="logo">
+    </div>
+    <div class="avatar">
+      <img id="avatar" src="https://image.ibb.co/htQKLT/ale.png" alt="avatar" />
+    </div>
+  </header>
+
+  <main class="main">
+    <section>
+      <form class="sede">
+        <div class="select-principal">
+          <div id="selector-sede">
+            <label for="sede">Elige sede:</label>
+            <select class="select" id="sede">
+              <option value="elegir" disabled selected></option>
+              <option value="lim">Lima</option>
+              <option value="scl">Santiago de Chile</option>
+              <option value="cdmx">Ciudad de México</option>
+              <option value="gdl">Guadalajara</option>
+              <option value="spl">Sao Paulo</option>
+            </select>
+          </div>
+
+          <div id="selector-cohort">
+            <label for="cohort">Elige cohort</label>
+            <select class="select" id="cohort"></select>
+          </div>
+        </div>
+
+      <div id="container">
+        <div id="select-orden">
+          <label for="ordenar">Ordenar por:</label>
+          <select class="select" id="select-ordenar">
+            <option id="ordenar">Por nombre</option>
+          </select>
+        </div>
+
+        <div class="button">
+          <button>ASC</button>
+          <button>DSC</button>
+        </div>
+
+        <div id="busqueda">
+          <input type="search" id="buscar-alumna" placeholder="Buscar alumna...">
+          <button>Buscar</button>
+        </div>
+      </div>  
+      </form>
+      <div class="agregar-alumnas"></div>
+    </section>
+  </main>
+
+  <footer>Realizado por Karina y Kalu - Laboratoria</footer>
+  
+  <script src="p-data.js"></script>
+  <script src="p-main.js"></script>
+</body>
+</html>
