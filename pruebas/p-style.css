@@ -44,11 +44,11 @@ body {
   .main {
     padding: 10px;
     margin: 10px;
-    background-color: yellow;
+    background-color: rgb(248, 248, 55)0;
   }
   
   .select-principal{
-    background-color: aquamarine;
+    background-color: #f9fc40;
   }
 
   footer {
@@ -77,7 +77,7 @@ body {
 
 #container {
   width:100%;
-  text-align:center;
+  /*text-align:center;*/
 }
 
 #select-orden {
@@ -94,4 +94,13 @@ body {
 #busqueda {
   float:right;
   width:40%;
+}
+
+#agregar-alumnas {
+  width: 25%;
+  height: 10%;
+  padding: 3px;
+  background-color: #ffffffce; 
+  border: yellow;
+  display: block;
 }

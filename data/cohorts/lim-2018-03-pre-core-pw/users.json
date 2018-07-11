@@ -3121,7 +3121,7 @@
         "id": "VgTrNrAJzOMrqL4Am9UCmr7Fxkb2",
         "github": "",
         "locale": "es-ES",
-        "signupCohort": "test",
+        "signupCohort": "lim-test",
         "timezone": "America/Lima",
         "name": "Michelle Seguil",
         "linkedin": "michellesegv",
@@ -4055,7 +4055,7 @@
     },
     {
         "id": "fmWoMGdICzMH55u1NrPqCTC6Ch03",
-        "signupCohort": "test",
+        "signupCohort": "lim-test",
         "timezone": "America/Lima",
         "name": "Ruth Salvador",
         "linkedin": "ruth-salvador",
@@ -4707,7 +4707,7 @@
         "linkedin": "joalbert-gonzález-9bb2892a",
         "github": "",
         "locale": "es-ES",
-        "signupCohort": "test",
+        "signupCohort": "lim-test",
         "role": "instructor"
     },
     {
@@ -5417,7 +5417,7 @@
         "linkedin": "gonzaloparra",
         "github": "",
         "locale": "es-ES",
-        "signupCohort": "test",
+        "signupCohort": "lim-test",
         "timezone": "America/Lima",
         "name": "Gonzalo Parra ",
         "role": "instructor"
