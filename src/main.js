@@ -1,117 +1,112 @@
-//Codigo a Ejecutar al Cargar la Pagina
-function myOnLoad() {
- cargarSedes();
+//VARIABLES PARA NOMBRAR LA DATA
+const urlUsers = "../data/cohorts/lim-2018-03-pre-core-pw/users.json";
+const urlProgress = "../data/cohorts/lim-2018-03-pre-core-pw/progress.json";
+const urlCohorts = "../data/cohorts.json";
+
+//llamar los elementos del DOM - HTML
+let sedes = document.getElementById('sede');
+let cohortSelect = document.getElementById('cohort');
+let addUsers = document.getElementById('agregar-alumnas');
+
+const searchStudent = document.getElementById('buscar-alumna');
+
+//Funcion que me perimite hacer la petición de la data que está en mi archivo json
+const getData = (url, callback) => {
+  const llamarUser = new XMLHttpRequest();
+  llamarUser.open('GET', url);
+  llamarUser.onload = callback;
+  llamarUser.onerror = llamadoError;
+  llamarUser.send();
+};
+
+const llamadoError = () => {
+  console.log('se produjo un error')
 }
 
-// funcion para Cargar sedes al campo <select>
-function cargarSedes() {
+
+//OBJETO PARA FUNCIÓN 4 -- ARGUMENTOS OBJETO GLOBAL
+let options = {
+  cohort: [],
+  cohortData: {
+    users: null,
+    progress: null,
+  },
+  orderBy: 'name', //modificar desde sort (f3)
+  orderDirection: 'ASC',
+  search: '',
+}
+
+
+
+
+//MOSTRAR A LOS USERs
+const mostrarUser = (users) => {
+  cohortSelect.addEventListener('change', (event) => {
+    //console.log(event.target.value)
+    const cohort = options.cohorts.find(c => c.id === event.target.value);
+    options.cohort = cohort;
+    //console.log(options);
+    const nuevoUsers = processCohortData(options);
+        
+    nuevoUsers.forEach(elementUser => {
+      //debo comparar el users.signupcohort con el cohort.id (event.target.value)
+      // if (elementUser.sing === event.target.value) {
+        // console.log(users.elementUser);
+        addUsers.innerHTML += `<p id="add-students">${'Estudiante: ' + elementUser.name}  
+          ${'Percent: ' + elementUser.stats.percent} </p>`;
+        //console.log(addUsers);
+      // }
+    });
+  });
+}
+
+
+//FUNCIONES PARA LLAMAR A USER - PROGRESS - COHORTS
+const llamadoUser = (event) => {
+  //console.log(event.target.responseText);
+  const dataUser = JSON.parse(event.target.responseText);
+  //console.log(dataUser);
+  options.cohortData.users = dataUser;
+  mostrarUser(dataUser);
+}
+  //console.log(options);
+
  
-  var array = ["Lima", "Santiago", "Mexico", "Brasil"];
+  const llamadoProgress = () => {
+    const dataProgress = JSON.parse(event.target.responseText);
+    //console.log(dataProgress);
+    options.cohortData.progress = dataProgress;
+    //console.log(options);
 
- // Ordena el Array Alfabeticamente
- array.sort();
+    const llamadoCohorts = () => {
+      const dataCohorts = JSON.parse(event.target.responseText);
+      options.cohorts = dataCohorts;
+     
+      //console.log(dataCohorts);
+      // options.cohort = dataCohorts;
+      // console.log(options);
+      mostrarCohorts(dataCohorts);
+    };
+    getData(urlCohorts, llamadoCohorts)
+  };
+  getData(urlProgress, llamadoProgress)
 
- addOptions("cboSede", array);
+
+//Llamar a los users
+getData(urlUsers, llamadoUser)
+
+
+//SELECCIONAR SEDE, CREAR OPTIONS EN SEDES Y MOSTRAR COHORTS 
+const mostrarCohorts = (cohorts) => {
+  sedes.addEventListener('change', (event) => {
+    //console.log(event.target.value)
+    cohortSelect.innerHTML = ''
+    cohorts.forEach(elementCohort => {
+      if (elementCohort.id.startsWith(event.target.value)) {
+        //console.log(elementCohort.id);
+        cohortSelect.innerHTML += `<option value="${elementCohort.id}">${elementCohort.id}</option>`;
+      }
+    });
+  });
 }
 
-// agregar opciones a un <select>
-function addOptions(domElement, array) {
- var select = document.getElementsByName(domElement)[0];
-//console.log(select);
- for (value in array) {
-  var option = document.createElement("option");
-  option.text = array[value];
-  select.add(option);
- }
-}
-
-let cboUsers = document.getElementById('cboUsers');
-cboUsers.addEventListener("change", function () {
-    getProgress();
-});
-
-getCohort();
-function cursos(){
-  let selectv = document.getElementById("cboCohorts");
-    if(selectv.options[selectv.selectedIndex].value ==="lim-2018-03-pre-core-pw"){
-    computeUsersStats();
-    }else{
-      document.getElementById("cboUsers").innerText = null;
-    }
-}
-
- 
-function getCohort() {
-    let xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (xhttp.readyState === 4 && xhttp.status === 200) {
-            let arrayCohorts = JSON.parse(xhttp.responseText);
-            // console.log(arrayCohorts);
-            let select = document.getElementById("cboCohorts");
-            for (let i in arrayCohorts) {
-                let option = document.createElement("option");
-                select.options.add(option, 0);
-                select.options[0].value = arrayCohorts[i].id;
-                select.options[0].innerText = arrayCohorts[i].id;
-            }
-   }
-    };
-
-    xhttp.open("GET", "../data/cohorts.json", true);
-    xhttp.send();
-};
-function computeUsersStats() {
-    let xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (xhttp.readyState === 4 && xhttp.status === 200) {
-
-            let arrayUsers = JSON.parse(xhttp.responseText);
-            let select = document.getElementById("cboUsers"); 
-            for (let i in arrayUsers) {
-                let option = document.createElement("option");
-                select.options.add(option, 0);
-                select.options[0].value = arrayUsers[i].id;
-                select.options[0].innerText = arrayUsers[i].name;
-            }
-        }
-    };
-    xhttp.open("GET", "../data/cohorts/lim-2018-03-pre-core-pw/users.json", true);
-    xhttp.send();
-};
-
-function getProgress() {
-
-    let select = document.getElementById("cboUsers");
-    let xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-		let cont=0;
-        if (xhttp.readyState === 4 && xhttp.status === 200) {
-                                                                  
-            let arrayProgress = JSON.parse(xhttp.responseText);
-            let arrayUnits = arrayProgress[select.value]['intro']['units'];
-            document.getElementById("progressTable").innerText = null;
-
-            for (let key in arrayProgress){
-              if (arrayProgress[select.value]['intro']['units']['02-variables-and-data-types']['parts']['06-exercises']['exercises']['01-coin-convert']['completed'] == 1 && arrayProgress[select.value]['intro']['units']['02-variables-and-data-types']['parts']['06-exercises']['exercises']['02-restaurant-bill']['completed'] == 1){
-                cont++;
-              }
-            }
-            for (let i in arrayUnits) {
-
-                console.log(i);
-                let fila = "<tr><td>" + i + "</td><td>" + arrayUnits[i].completedParts + "</td></tr>";
-                let btn = document.createElement("TR");
-                btn.innerHTML = fila;
-                document.getElementById("progressTable").appendChild(btn);
-			}
-
-			let fila2 = "<tr><td>Total de Alumnas que realizarón los ejercicios : </td><td>" + cont + "</td></tr>";
-			let btn2 = document.createElement("TR");
-			btn2.innerHTML = fila2;
-			document.getElementById("progressTable").appendChild(btn2);
-			
-        }
-    };
-    xhttp.open("GET", "../data/cohorts/lim-2018-03-pre-core-pw/progress.json", true);
-    xhttp.send();
-};
