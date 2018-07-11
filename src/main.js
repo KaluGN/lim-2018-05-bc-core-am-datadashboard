@@ -52,8 +52,8 @@ const mostrarUser = (users) => {
       //debo comparar el users.signupcohort con el cohort.id (event.target.value)
       // if (elementUser.sing === event.target.value) {
         // console.log(users.elementUser);
-        addUsers.innerHTML += `<p id="add-students">${'Estudiante: ' + elementUser.name}  
-          ${'Percent: ' + elementUser.stats.percent} </p>`;
+        addUsers.innerHTML += `<li id="add-students" type="circle">${'Estudiante: ' + elementUser.name}  
+          ${'Percent: ' + elementUser.stats.percent} </li>`;
         //console.log(addUsers);
       // }
     });
