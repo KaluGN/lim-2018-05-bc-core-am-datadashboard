@@ -137,19 +137,16 @@ window.sortUsers = (users, orderBy, orderDirection) => {
     if (x < y) { return -1;}
     return 0;
   });
-  if (orderBy === 'name' & orderDirection === 'ascd'){
-
-  }else{
-
-  }
-  console.log(orderName)
-  if (orderBy === 'name' & orderDirection === 'desc')
-  console.log(orderName)
-
+  if (orderBy === 'name' && orderDirection === 'asc'){
+    console.log(orderName)
+    return orderName
+  }else if (orderBy === 'name' && orderDirection === 'dsc') {
+    const nuevo = orderName.reverse();
+    return nuevo
+      }
   
   
-  
-  return users.sort(); 
+  // return users.sort(); 
 }
 
 

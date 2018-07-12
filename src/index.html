@@ -22,8 +22,8 @@
 
   <main class="main">
     <section>
-      <!--SELECTOR DE SEDE Y COHORTs-->
       <form class="sede">
+        <!--SELECTOR DE SEDE Y COHORTs-->
         <div class="select-principal">
           <div id="selector-sede">
             <label for="sede">Elige sede:</label>
@@ -45,29 +45,35 @@
 
         <!--SELECTORES DE ORDENAR / BUTTON / BÚSQUEDA-->
         <div id="container">
-          <div id="select-orden">
-            <label for="ordenar">Ordenar por:</label>
-            <select class="select" id="select-ordenar">
-              <option value="elegir2" ></option>
-              <option value="name">Por nombre</option>
-              <option value="exercises">Ejercicios</option>
-              <option value="reads">Lecturas</option>
-              <option value="quizzes">Quizzes</option>
-              <option value="percent">Progreso</option>
-              <option value="quizzesAvg">PromedioScore</option>
-            </select>
-          </div>
+          <div id="selectores">
+            <div class="selectores">
+              <label for="ordenar">Ordenar por:</label>
+              <select class="select" id="select-ordenar">selectores
+                <option value="elegir2"></option>
+                <option value="name">Por nombre</option>
+                <option value="exercises">Ejercicios</option>
+                <option value="reads">Lecturas</option>
+                <option value="quizzes">Quizzes</option>
+                <option value="percent">Progreso</option>
+                <option value="quizzesAvg">PromedioScore</option>
+              </select>
 
-          <div class="button">
-            <button type="button" id="buttonA" value="ascd">ASC</button>
-            <button type="button" id="buttonD" value="desc">DSC</button>
+              <label for="ordenar">De:</label>
+              <select class="select" id="mayor-menor">
+                <option></option>
+                <option value="dsc">Desc</option>
+                <option value="asc">asc</option>
+            </div>
           </div>
 
           <div id="busqueda">
-            <input type="search" id="buscar-alumna" placeholder="Buscar alumna..."/>
-            <!--button id="boton-buscar">Buscar</button-->
+            <input type="search" id="buscar-alumna" placeholder="Buscar alumna..." />
           </div>
+
         </div>
+
+        <button id="boton-ordenar" class="boton-ordenar" type="button" value="orderBut">Ordenar</button>
+
       </form>
     </section>
 
@@ -80,7 +86,7 @@
 
   <script src="data.js"></script>
   <script src="main.js"></script>
-   
+
 </body>
 
 </html>

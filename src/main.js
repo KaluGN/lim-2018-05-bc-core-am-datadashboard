@@ -9,8 +9,9 @@ let cohortSelect = document.getElementById('cohort');
 let addUsers = document.getElementById('agregar-alumnas');
 const searchStudent = document.getElementById('buscar-alumna');
 const selectOrderBy = document.getElementById('select-ordenar');
-const buttonASC = document.getElementById('buttonA');
-const buttonDSC = document.getElementById('buttonD')
+const selectOrderTo = document.getElementById('mayor-menor');
+const orderButton = document.getElementById('boton-ordenar');
+
 
 //Funcion que me perimite hacer la petición de la data que está en mi archivo json
 const getData = (url, callback) => {
@@ -34,7 +35,7 @@ let options = {
     progress: null,
   },
   orderBy: 'name', //modificar desde sort (f3)
-  orderDirection: 'ASC',
+  orderDirection: 'asc',
   search: '',
 }
 
@@ -130,22 +131,12 @@ searchStudent.addEventListener('keyup', function () {
 })
 
 //LLAMANDO A SORT
-// buttonASC.addEventListener('click', (event) => {
-//   // console.log(event.target.textContent);
-//   // console.log(selectOrderBy.value);
-//   options.orderBy = selectOrderBy.value;
-//   options.orderDirection = buttonASC.textContent; 
-//   const newOrder = processCohortData(options);
-//   addUsers.innerHTML = '';
-//   viewUser(newOrder);
-// })
-
-// buttonDSC.addEventListener('click', (event) => {
-//   // console.log(event.target.textContent);
-//   // console.log(selectOrderBy.value);
-//   options.orderBy = selectOrderBy.value;
-//   options.orderDirection = buttonDSC.textContent; 
-//   const newOrder = processCohortData(options);
-//   addUsers.innerHTML = '';
-//   viewUser(newOrder);
-// })
+orderButton.addEventListener('click', (event) => {
+  // console.log(event.target.textContent);
+  // console.log(selectOrderBy.value);
+  options.orderBy = selectOrderBy.value;
+  options.orderDirection = selectOrderTo.value; 
+  const newOrder = processCohortData(options);
+  addUsers.innerHTML = '';
+  viewUser(newOrder);
+})
