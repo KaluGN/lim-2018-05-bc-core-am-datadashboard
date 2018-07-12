@@ -155,8 +155,7 @@ window.sortUsers = (users, orderBy, orderDirection) => {
       //     return b.stats.exercises.completed - a.stats.exercises.completed });
       //   return orderNew;
       // }
-  
-  
+   
   // return users.sort(); 
 }
 
