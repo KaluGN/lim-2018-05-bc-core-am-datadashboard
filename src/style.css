@@ -96,11 +96,12 @@ float:right;
 width:40%;
 }
 
-#agregar-alumnas {
-width: 25%;
+.student-data {
+width: 100%;
 height: 10%;
 padding: 3px;
 background-color: #ffffffce; 
 border: yellow;
-display: block;
+display: inline-block;
+white-space: pre-line;
 }

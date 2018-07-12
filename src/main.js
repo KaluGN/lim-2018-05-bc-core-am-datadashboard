@@ -7,16 +7,18 @@ const urlCohorts = "../data/cohorts.json";
 let sedes = document.getElementById('sede');
 let cohortSelect = document.getElementById('cohort');
 let addUsers = document.getElementById('agregar-alumnas');
-
 const searchStudent = document.getElementById('buscar-alumna');
+const selectOrderBy = document.getElementById('select-ordenar');
+const buttonASC = document.getElementById('buttonA');
+const buttonDSC = document.getElementById('buttonD')
 
 //Funcion que me perimite hacer la petición de la data que está en mi archivo json
 const getData = (url, callback) => {
-  const llamarUser = new XMLHttpRequest();
-  llamarUser.open('GET', url);
-  llamarUser.onload = callback;
-  llamarUser.onerror = llamadoError;
-  llamarUser.send();
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', url);
+  xhr.onload = callback;
+  xhr.onerror = llamadoError;
+  xhr.send();
 };
 
 const llamadoError = () => {
@@ -37,10 +39,22 @@ let options = {
 }
 
 
+const viewUser = (nuevoUsers) => {
+  nuevoUsers.forEach(elementUser => {
+    addUsers.innerHTML += `<p id="add-students" class="student-data">${
+      elementUser.name +'\n'+  
+      'Progreso general: ' + elementUser.stats.percent +'\n'+ 
+      '% de ejercicios: ' + elementUser.stats.exercises.percent +'\n'+
+      '% de lecturas: ' + elementUser.stats.reads.percent +'\n'+
+      '% de quiz: ' + elementUser.stats.quiz.percent
+    }</p>`;
 
+   
+});
+}
 
 //MOSTRAR A LOS USERs
-const mostrarUser = (users) => {
+const showUser = (users) => {
   cohortSelect.addEventListener('change', (event) => {
     //console.log(event.target.value)
     const cohort = options.cohorts.find(c => c.id === event.target.value);
@@ -48,15 +62,7 @@ const mostrarUser = (users) => {
     //console.log(options);
     const nuevoUsers = processCohortData(options);
         
-    nuevoUsers.forEach(elementUser => {
-      //debo comparar el users.signupcohort con el cohort.id (event.target.value)
-      // if (elementUser.sing === event.target.value) {
-        // console.log(users.elementUser);
-        addUsers.innerHTML += `<p id="add-students">${'Estudiante: ' + elementUser.name}  
-          ${'Percent: ' + elementUser.stats.percent} </p>`;
-        //console.log(addUsers);
-      // }
-    });
+    viewUser(nuevoUsers)
   });
 }
 
@@ -67,7 +73,7 @@ const llamadoUser = (event) => {
   const dataUser = JSON.parse(event.target.responseText);
   //console.log(dataUser);
   options.cohortData.users = dataUser;
-  mostrarUser(dataUser);
+  showUser(dataUser);
 }
   //console.log(options);
 
@@ -110,3 +116,36 @@ const mostrarCohorts = (cohorts) => {
   });
 }
 
+//LLAMANDO AL BUSCADOR
+searchStudent.addEventListener('keyup', function () {
+  options.search = searchStudent.value;
+  let data = processCohortData(options);
+  console.log(data);
+  
+  addUsers.innerHTML = '';
+  // console.log(showUser(data));
+  viewUser(data);
+  // console.log(showUser(data));
+  
+})
+
+//LLAMANDO A SORT
+// buttonASC.addEventListener('click', (event) => {
+//   // console.log(event.target.textContent);
+//   // console.log(selectOrderBy.value);
+//   options.orderBy = selectOrderBy.value;
+//   options.orderDirection = buttonASC.textContent; 
+//   const newOrder = processCohortData(options);
+//   addUsers.innerHTML = '';
+//   viewUser(newOrder);
+// })
+
+// buttonDSC.addEventListener('click', (event) => {
+//   // console.log(event.target.textContent);
+//   // console.log(selectOrderBy.value);
+//   options.orderBy = selectOrderBy.value;
+//   options.orderDirection = buttonDSC.textContent; 
+//   const newOrder = processCohortData(options);
+//   addUsers.innerHTML = '';
+//   viewUser(newOrder);
+// })
