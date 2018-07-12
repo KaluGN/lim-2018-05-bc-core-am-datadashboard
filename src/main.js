@@ -13,6 +13,19 @@ const selectOrderTo = document.getElementById('mayor-menor');
 const orderButton = document.getElementById('boton-ordenar');
 
 
+//ARGUMENTOS OBJETO GLOBAL
+let options = {
+  cohort: [],
+  cohortData: {
+    users: null,
+    progress: null,
+  },
+  orderBy: 'name', 
+  orderDirection: 'ASC',
+  search: '',
+}
+
+
 //Funcion que me perimite hacer la petición de la data que está en mi archivo json
 const getData = (url, callback) => {
   const xhr = new XMLHttpRequest();
@@ -26,34 +39,6 @@ const llamadoError = () => {
   console.log('se produjo un error')
 }
 
-
-//OBJETO PARA FUNCIÓN 4 -- ARGUMENTOS OBJETO GLOBAL
-let options = {
-  cohort: [],
-  cohortData: {
-    users: null,
-    progress: null,
-  },
-  orderBy: 'name', //modificar desde sort (f3)
-  orderDirection: 'asc',
-  search: '',
-}
-
-
-const viewUser = (nuevoUsers) => {
-  nuevoUsers.forEach(elementUser => {
-    addUsers.innerHTML += `<p id="add-students" class="student-data">${
-      elementUser.name +'\n'+  
-      'Progreso general: ' + elementUser.stats.percent +'\n'+ 
-      '% de ejercicios: ' + elementUser.stats.exercises.percent +'\n'+
-      '% de lecturas: ' + elementUser.stats.reads.percent +'\n'+
-      '% de quiz: ' + elementUser.stats.quiz.percent
-    }</p>`;
-
-   
-});
-}
-
 //MOSTRAR A LOS USERs
 const showUser = (users) => {
   cohortSelect.addEventListener('change', (event) => {
@@ -62,19 +47,19 @@ const showUser = (users) => {
     options.cohort = cohort;
     //console.log(options);
     const nuevoUsers = processCohortData(options);
-        
-    nuevoUsers.forEach(elementUser => {
-      //debo comparar el users.signupcohort con el cohort.id (event.target.value)
-      // if (elementUser.sing === event.target.value) {
-        // console.log(users.elementUser);
-        addUsers.innerHTML += `<li id="add-students" type="circle">${'Estudiante: ' + elementUser.name}  
-          ${'Percent: ' + elementUser.stats.percent} </li>`;
-        //console.log(addUsers);
-      // }
-    });
+    const viewUser = (nuevoUsers) => {
+      nuevoUsers.forEach(elementUser => {
+        addUsers.innerHTML += `<p id="add-students" class="student-data">${
+          elementUser.name + '\n' +
+          'Progreso general: ' + elementUser.stats.percent + '\n' +
+          '% de ejercicios: ' + elementUser.stats.exercises.percent + '\n' +
+          '% de lecturas: ' + elementUser.stats.reads.percent + '\n' +
+          '% de quiz: ' + elementUser.stats.quiz.percent
+          }</p>`;
+      });
+    }
   });
 }
-
 
 //FUNCIONES PARA LLAMAR A USER - PROGRESS - COHORTS
 const llamadoUser = (event) => {
@@ -84,31 +69,26 @@ const llamadoUser = (event) => {
   options.cohortData.users = dataUser;
   showUser(dataUser);
 }
+//console.log(options);
+const llamadoProgress = () => {
+  const dataProgress = JSON.parse(event.target.responseText);
+  //console.log(dataProgress);
+  options.cohortData.progress = dataProgress;
   //console.log(options);
 
- 
-  const llamadoProgress = () => {
-    const dataProgress = JSON.parse(event.target.responseText);
-    //console.log(dataProgress);
-    options.cohortData.progress = dataProgress;
-    //console.log(options);
+  const llamadoCohorts = () => {
+    const dataCohorts = JSON.parse(event.target.responseText);
+    options.cohorts = dataCohorts;
 
-    const llamadoCohorts = () => {
-      const dataCohorts = JSON.parse(event.target.responseText);
-      options.cohorts = dataCohorts;
-     
-      //console.log(dataCohorts);
-      // options.cohort = dataCohorts;
-      // console.log(options);
-      mostrarCohorts(dataCohorts);
-    };
-    getData(urlCohorts, llamadoCohorts)
+    //console.log(dataCohorts);
+    // options.cohort = dataCohorts;
+    // console.log(options);
+    mostrarCohorts(dataCohorts);
   };
-  getData(urlProgress, llamadoProgress)
-
-
-//Llamar a los users
-getData(urlUsers, llamadoUser)
+  getData(urlCohorts, llamadoCohorts)
+};
+getData(urlProgress, llamadoProgress);
+getData(urlUsers, llamadoUser);
 
 
 //SELECCIONAR SEDE, CREAR OPTIONS EN SEDES Y MOSTRAR COHORTS 
@@ -130,12 +110,12 @@ searchStudent.addEventListener('keyup', function () {
   options.search = searchStudent.value;
   let data = processCohortData(options);
   console.log(data);
-  
+
   addUsers.innerHTML = '';
   // console.log(showUser(data));
   viewUser(data);
   // console.log(showUser(data));
-  
+
 })
 
 //LLAMANDO A SORT
@@ -143,7 +123,7 @@ orderButton.addEventListener('click', (event) => {
   // console.log(event.target.textContent);
   // console.log(selectOrderBy.value);
   options.orderBy = selectOrderBy.value;
-  options.orderDirection = selectOrderTo.value; 
+  options.orderDirection = selectOrderTo.value;
   const newOrder = processCohortData(options);
   addUsers.innerHTML = '';
   viewUser(newOrder);

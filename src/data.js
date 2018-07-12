@@ -138,12 +138,23 @@ window.sortUsers = (users, orderBy, orderDirection) => {
     return 0;
   });
   if (orderBy === 'name' && orderDirection === 'asc'){
-    console.log(orderName)
     return orderName
   }else if (orderBy === 'name' && orderDirection === 'dsc') {
     const nuevo = orderName.reverse();
     return nuevo
-      }
+  } 
+  
+ 
+      // } else if  (orderBy === 'exercises' & orderDirection === 'asc') {
+      //   const orderNew = users.sort(function (a, b) { 
+      //     console.log(orderNew)
+      //     return a.stats.exercises.completed - b.stats.exercises.completed });
+      //   return orderNew;
+      // } else if (orderBy === 'exercises' & orderDirection === 'desc') {
+      //   const orderNew = users.sort(function (a, b) { 
+      //     return b.stats.exercises.completed - a.stats.exercises.completed });
+      //   return orderNew;
+      // }
   
   
   // return users.sort(); 
@@ -159,8 +170,6 @@ window.filterUsers = (users, search) => {
 
 
 
-
-
 window.processCohortData = (options) => {
   const courses = Object.keys(options.cohort.coursesIndex);
   // console.log(courses)
@@ -173,4 +182,3 @@ window.processCohortData = (options) => {
 
   return estudents;
 }
-
