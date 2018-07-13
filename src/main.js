@@ -61,7 +61,7 @@ const viewUser = (nuevoUsers) => {
     options.cohort = cohort;
     //console.log(options);
     const nuevoUsers = processCohortData(options);
-    console.log(nuevoUsers);
+    // console.log(nuevoUsers);
     addUsers.innerHTML = ' '    
    viewUser(nuevoUsers)
   });
