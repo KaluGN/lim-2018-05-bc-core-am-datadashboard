@@ -1,8 +1,16 @@
+const resultdiv = (a,b) => {
+  if (a!=0 && b!=0){
+    return a/b
+  }else{return 0}
+}
+
 //////AQUI VA LO DE DATA
 window.computeUsersStats = (users, progress, courses) => {
   // console.log(users,progress,courses);
   let recorrerUserStats = users.filter(elementUser => elementUser.role === 'student');
   //console.log(recorrerUserStats);
+
+const userWithStats =[];
 
   //Función para obtener progreso y demás datos de 'exercises'
   const percentUsers = (recorrerUserStats) => {
@@ -17,6 +25,7 @@ window.computeUsersStats = (users, progress, courses) => {
     return (contador / courses.length)
   }
 
+ 
   const objectExercise = (recorrerUserStats) => {
     let contadorTotal = 0;
     let contadorCompleted = 0
@@ -46,9 +55,11 @@ window.computeUsersStats = (users, progress, courses) => {
     const exercises = new Object();
     exercises.total = contadorTotal
     exercises.completed = contadorCompleted
-    exercises.percent = contadorCompleted * 100 / contadorTotal
+    exercises.percent = resultdiv(contadorCompleted * 100, contadorTotal)
     return exercises
   }
+
+  
   const objectReads = (recorrerUserStats) => {
     let contadorTotal = 0;
     let contadorCompleted = 0
@@ -73,7 +84,7 @@ window.computeUsersStats = (users, progress, courses) => {
     const read = new Object();
     read.total = contadorTotal;
     read.completed = contadorCompleted;
-    read.percent = Math.round(contadorCompleted * 100 / contadorTotal);
+    read.percent = Math.round(resultdiv(contadorCompleted * 100,contadorTotal));
     return read
   }
   const objectQuizz = (recorrerUserStats) => {
@@ -104,7 +115,7 @@ window.computeUsersStats = (users, progress, courses) => {
     const quiz = new Object();
     quiz.total = contadorTotal,
       quiz.completed = contadorCompleted,
-      quiz.percent = Math.round(contadorCompleted * 100 / contadorTotal),
+      quiz.percent = Math.round(resultdiv(contadorCompleted * 100, contadorTotal)),
       quiz.scoreSum = sumaScore,
       quiz.scoreAvg = Math.round(sumaScore / contadorCompleted)
     return quiz
@@ -130,7 +141,6 @@ window.computeUsersStats = (users, progress, courses) => {
 };
 
 window.sortUsers = (users, orderBy, orderDirection) => {
-
 
   const orderName = users.sort(function (a, b) {
     var x = a.name.toUpperCase();
