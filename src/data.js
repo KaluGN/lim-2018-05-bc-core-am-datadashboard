@@ -1,7 +1,18 @@
+const resultdiv = (a,b) => {
+  if (a!=0 && b!=0){
+    return a/b
+  }else{return 0}
+}
+
+//////AQUI VA LO DE DATA
 window.computeUsersStats = (users, progress, courses) => {
   // console.log(users,progress,courses);
   let recorrerUserStats = users.filter(elementUser => elementUser.role === 'student');
   //console.log(recorrerUserStats);
+
+const userWithStats =[];
+
+  //Función para obtener progreso y demás datos de 'exercises'
   const percentUsers = (recorrerUserStats) => {
     let contador = 0;
     courses.forEach(course1 => {
@@ -14,7 +25,7 @@ window.computeUsersStats = (users, progress, courses) => {
     return (contador / courses.length)
   }
 
-  //Función para obtener progreso y demás datos de 'exercises'
+ 
   const objectExercise = (recorrerUserStats) => {
     let contadorTotal = 0;
     let contadorCompleted = 0
@@ -33,7 +44,6 @@ window.computeUsersStats = (users, progress, courses) => {
                   if (exercises[exercise].completed === 1) {
                     contadorCompleted++
                   }
-
                 }
               }
             }
@@ -43,11 +53,13 @@ window.computeUsersStats = (users, progress, courses) => {
     });
     //creación del objeto exercises para mostrar en función global
     const exercises = new Object();
-    exercises.total = contadorTotal,
-      exercises.completed = contadorCompleted
-    exercises.percent = contadorCompleted * 100 / contadorTotal
+    exercises.total = contadorTotal
+    exercises.completed = contadorCompleted
+    exercises.percent = resultdiv(contadorCompleted * 100, contadorTotal)
     return exercises
   }
+
+  
   const objectReads = (recorrerUserStats) => {
     let contadorTotal = 0;
     let contadorCompleted = 0
@@ -70,9 +82,9 @@ window.computeUsersStats = (users, progress, courses) => {
       }
     });
     const read = new Object();
-    read.total = contadorTotal,
-      read.completed = contadorCompleted
-    read.percent = Math.round(contadorCompleted * 100 / contadorTotal)
+    read.total = contadorTotal;
+    read.completed = contadorCompleted;
+    read.percent = Math.round(resultdiv(contadorCompleted * 100,contadorTotal));
     return read
   }
   const objectQuizz = (recorrerUserStats) => {
@@ -80,7 +92,7 @@ window.computeUsersStats = (users, progress, courses) => {
     let contadorCompleted = 0;
     let sumaScore = 0;
     courses.forEach(course1 => {
-      const progressUsers = progress[recorrerUserStats.id];
+      const progressUsers = progress[recorrerUserStats.id]; //segun test aquí hay un error
       if (progressUsers && Object.keys(progressUsers).length > 0 && !Array.isArray(progressUsers)) {
         const units = Object.values(progressUsers[course1].units)
         units.forEach(partsUnits => {
@@ -103,7 +115,7 @@ window.computeUsersStats = (users, progress, courses) => {
     const quiz = new Object();
     quiz.total = contadorTotal,
       quiz.completed = contadorCompleted,
-      quiz.percent = Math.round(contadorCompleted * 100 / contadorTotal),
+      quiz.percent = Math.round(resultdiv(contadorCompleted * 100, contadorTotal)),
       quiz.scoreSum = sumaScore,
       quiz.scoreAvg = Math.round(sumaScore / contadorCompleted)
     return quiz
@@ -123,40 +135,79 @@ window.computeUsersStats = (users, progress, courses) => {
     return userWithStats;
   })
   // console.log(recorrerUserStats);
+// console.log(recorrerUserStats);
 
   return recorrerUserStats;
 };
 
-
-
 window.sortUsers = (users, orderBy, orderDirection) => {
-  const orderName = users.sort(function (a,b){
+
+  const orderName = users.sort(function (a, b) {
     var x = a.name.toUpperCase();
     var y = b.name.toUpperCase();
     if (x > y) { return 1; }
-    if (x < y) { return -1;}
+    if (x < y) { return -1; }
     return 0;
   });
   if (orderBy === 'name' && orderDirection === 'asc'){
     return orderName
-  }else if (orderBy === 'name' && orderDirection === 'dsc') {
+  } else if (orderBy === 'name' && orderDirection === 'dsc') {
     const nuevo = orderName.reverse();
     return nuevo
-  } 
-  
- 
-      // } else if  (orderBy === 'exercises' & orderDirection === 'asc') {
-      //   const orderNew = users.sort(function (a, b) { 
-      //     console.log(orderNew)
-      //     return a.stats.exercises.completed - b.stats.exercises.completed });
-      //   return orderNew;
-      // } else if (orderBy === 'exercises' & orderDirection === 'desc') {
-      //   const orderNew = users.sort(function (a, b) { 
-      //     return b.stats.exercises.completed - a.stats.exercises.completed });
-      //   return orderNew;
-      // }
-   
-  // return users.sort(); 
+  } else if (orderBy === 'percent' && orderDirection === 'asc') {
+    const orderNew = users.sort(function (a, b) {
+      return a.stats.percent - b.stats.percent
+    });
+    return orderNew;
+  } else if (orderBy === 'percent' && orderDirection === 'dsc') {
+    const orderNew = users.sort(function (a, b) {
+      return b.stats.percent - a.stats.percent
+    });
+    return orderNew;
+  } else if (orderBy === 'exercises' && orderDirection === 'asc') {
+    const orderNew = users.sort (function(a, b) {
+      return a.stats.exercises.completed - b.stats.exercises.completed
+    });
+    return orderNew;
+  } else if (orderBy === 'exercises' && orderDirection === 'dsc') {
+    const orderNew = users.sort (function(a, b){
+      return b.stats.exercises.completed - a.stats.exercises.completed
+    });
+    return orderNew;
+  } else if (orderBy === 'reads' && orderDirection === 'asc') {
+    const orderNew = users.sort (function(a, b) {
+      return a.stats.reads.completed - b.stats.reads.completed
+    });
+    return orderNew;
+  } else if (orderBy === 'reads' && orderDirection === 'dsc') {
+    const orderNew = users.sort (function(a, b) {
+      return b.stats.reads.completed - a.stats.reads.completed
+    });
+    return orderNew;
+  } else if (orderBy === 'quiz' && orderDirection === 'asc') {
+    const orderNew = users.sort (function (a, b) {
+      return a.stats.quiz.completed - b.stats.quiz.completed
+    });
+    return orderNew;
+  } else if (orderBy === 'quiz' && orderDirection === 'dsc') {
+    const orderNew = users.sort (function (a, b) {
+      return b.stats.quiz.completed - a.stats.quiz.completed
+    });
+    return orderNew;
+  } else if (orderBy === 'quizzesAvg' && orderDirection === 'asc') {
+    const orderNew = users.sort (function (a, b) {
+      return a.stats.quiz.scoreAvg - b.stats.quiz.scoreAvg
+    });
+    return orderNew;
+  } else if (orderBy === 'quizzesAvg' && orderDirection === 'dsc') {
+    const orderNew = users.sort (function (a, b) {
+      return b.stats.quiz.scoreAvg - a.stats.quiz.scoreAvg
+    });
+    return orderNew;
+  }
+
+
+   return users.sort(); 
 }
 
 
@@ -168,16 +219,21 @@ window.filterUsers = (users, search) => {
 }
 
 
-
 window.processCohortData = (options) => {
+  //console.log(options);
+
   const courses = Object.keys(options.cohort.coursesIndex);
   // console.log(courses)
   let estudents = computeUsersStats(options.cohortData.users, options.cohortData.progress, courses);
+  //console.log(estudents);
+
   estudents = sortUsers(estudents, options.orderBy, options.orderDirection);
+  //console.log(estudents);
+
   if (options.search !== '') {
-    estudents = filterUsers(estudents, options.search)
+    estudents = filterUsers(estudents, options.search) //segun test aquí hay un error
   }
+  //console.log(estudents); //segun test aquí hay un error
 
-
-  return estudents;
+  return estudents; //segun test aquí hay un error
 }

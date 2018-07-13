@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +12,7 @@
 <body>
   <header class="header">
     <div>
-      <img class=logo src="http://v.fastcdn.co/t/cf943cfe/5519e61e/1527645394-27418802-257x33-Laboratoria-Logo-RGB.png" alt="logo">
+      <img class="logo" src="http://v.fastcdn.co/t/cf943cfe/5519e61e/1527645394-27418802-257x33-Laboratoria-Logo-RGB.png" alt="logo">
     </div>
     <div class="avatar">
       <img id="avatar" src="https://image.ibb.co/htQKLT/ale.png" alt="avatar" />
@@ -50,24 +49,25 @@
               <label for="ordenar">Ordenar por:</label>
               <select class="select" id="select-ordenar">selectores
                 <option value="elegir2"></option>
-                <option value="name">Por nombre</option>
-                <option value="exercises">Ejercicios</option>
-                <option value="reads">Lecturas</option>
-                <option value="quizzes">Quizzes</option>
-                <option value="percent">Progreso</option>
-                <option value="quizzesAvg">PromedioScore</option>
+                <option value="name" id="name">Por nombre</option>
+                <option value="exercises" id="exercises">Ejercicios</option>
+                <option value="reads" id="reads">Lecturas</option>
+                <option value="quiz" id="quizzes">Quizzes</option>
+                <option value="percent" id="percent">Progreso</option>
+                <option value="quizzesAvg" id="quizzesAvg">PromedioScore</option>
               </select>
 
               <label for="ordenar">De:</label>
               <select class="select" id="mayor-menor">
                 <option></option>
-                <option value="dsc">Desc</option>
-                <option value="asc">asc</option>
+                <option value="dsc" id="dsc">Desc</option>
+                <option value="asc" id="asc">asc</option>
+              </select>
             </div>
           </div>
 
           <div id="busqueda">
-            <input type="search" id="buscar-alumna" placeholder="Buscar alumna..." />
+            <input type="search" class="select" id="buscar-alumna" placeholder="Buscar alumna..." />
           </div>
 
         </div>

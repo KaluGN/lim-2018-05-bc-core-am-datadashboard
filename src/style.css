@@ -4,10 +4,30 @@ body {
   margin: 1px;
  }
 
-@media screen and (max-width: 700px) {
-  .menu-lateral {
-    display: none;
+@media screen and (max-width: 380px) {
+  .header {
+    width: 100%;
+    
   }
+  .logo {
+    width: 65%
+  }
+  .avatar {
+    width: 20%;
+    display: inline-block;
+    /* float: right; */
+  }
+  
+  .sede {
+    width: 100%;
+  }
+  #selector-cohort {
+    width: 100%;
+  }
+  .select {
+    width: 100%
+  }
+  
 }
 
 @media screen and (max-width: 400px) {

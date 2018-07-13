@@ -21,7 +21,7 @@ let options = {
     progress: null,
   },
   orderBy: 'name', 
-  orderDirection: 'ASC',
+  orderDirection: 'asc',
   search: '',
 }
 
@@ -40,7 +40,6 @@ const llamadoError = () => {
 }
 
 //MOSTRAR A LOS USERs
-const showUser = (users) => {
   cohortSelect.addEventListener('change', (event) => {
     //console.log(event.target.value)
     const cohort = options.cohorts.find(c => c.id === event.target.value);
@@ -59,7 +58,7 @@ const showUser = (users) => {
       });
     }
   });
-}
+
 
 //FUNCIONES PARA LLAMAR A USER - PROGRESS - COHORTS
 const llamadoUser = (event) => {
@@ -67,7 +66,7 @@ const llamadoUser = (event) => {
   const dataUser = JSON.parse(event.target.responseText);
   //console.log(dataUser);
   options.cohortData.users = dataUser;
-  showUser(dataUser);
+
 }
 //console.log(options);
 const llamadoProgress = () => {
@@ -118,10 +117,11 @@ searchStudent.addEventListener('keyup', function () {
 
 })
 
+// console.log(event.target.value);
+  // console.log(selectOrderBy.value);
+
 //LLAMANDO A SORT
 orderButton.addEventListener('click', (event) => {
-  // console.log(event.target.textContent);
-  // console.log(selectOrderBy.value);
   options.orderBy = selectOrderBy.value;
   options.orderDirection = selectOrderTo.value;
   const newOrder = processCohortData(options);
