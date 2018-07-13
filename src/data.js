@@ -28,7 +28,7 @@ window.computeUsersStats = (recorrerUserStats, progress, courses) => {
  
   const objectExercise = (recorrerUserStats) => {
     let contadorTotal = 0;
-    let contadorCompleted = 0;
+    let contadorCompleted = 0; //segun test aquí hay un error
     courses.forEach(course1 => {
       const progressUsers = progress[recorrerUserStats.id];
       if (progressUsers && Object.keys(progressUsers).length > 0 && !Array.isArray(progressUsers)) {
@@ -92,14 +92,14 @@ window.computeUsersStats = (recorrerUserStats, progress, courses) => {
     let contadorCompleted = 0;
     let sumaScore = 0;
     courses.forEach(course1 => {
-      const progressUsers = progress[recorrerUserStats.id]; //segun test aquí hay un error
+      const progressUsers = progress[recorrerUserStats.id]; 
       if (progressUsers && Object.keys(progressUsers).length > 0 && !Array.isArray(progressUsers)) {
         const units = Object.values(progressUsers[course1].units)
         units.forEach(partsUnits => {
           const parts = Object.values(partsUnits.parts)
           for (let part in parts) {
             // console.log(parts[part]['type']);
-            if (parts[part]['type'] === "quizzes") {
+            if (parts[part]['type'] === "quiz") {
               contadorTotal++
               if (parts[part]['completed'] === 1) {
                 contadorCompleted++
@@ -112,13 +112,13 @@ window.computeUsersStats = (recorrerUserStats, progress, courses) => {
         });
       }
     });
-    const quiz = new Object();
-    quiz.total = contadorTotal,
-      quiz.completed = contadorCompleted,
-      quiz.percent = Math.round(resultdiv(contadorCompleted * 100, contadorTotal)),
-      quiz.scoreSum = sumaScore,
-      quiz.scoreAvg = Math.round(sumaScore / contadorCompleted)
-    return quiz
+    const quizzes = new Object();
+    quizzes.total = contadorTotal,
+    quizzes.completed = contadorCompleted,
+    quizzes.percent = Math.round(resultdiv(contadorCompleted * 100, contadorTotal)),
+    quizzes.scoreSum = sumaScore,
+    quizzes.scoreAvg = Math.round(sumaScore / contadorCompleted)
+    return quizzes
   }
 
   recorrerUserStats = recorrerUserStats.map(objectUser => {
@@ -208,7 +208,7 @@ window.sortUsers = (users, orderBy, orderDirection) => {
   }
 
 
-   return users.sort(); 
+  //  return users.sort(); 
 }
 
 
@@ -231,11 +231,11 @@ window.processCohortData = (options) => {
   estudents = sortUsers(estudents, options.orderBy, options.orderDirection);
   //console.log(estudents);
 
-  if (options.search !== '') {
+  if (options.search !== '') { //segun test aquí hay un error
     estudents = filterUsers(estudents, options.search) //segun test aquí hay un error
   }
   //console.log(estudents); //segun test aquí hay un error
 
-  return estudents; //segun test aquí hay un error
+  return estudents; 
 }
 
