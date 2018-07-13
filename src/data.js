@@ -5,12 +5,12 @@ const resultdiv = (a,b) => {
 }
 
 //////AQUI VA LO DE DATA
-window.computeUsersStats = (users, progress, courses) => {
+window.computeUsersStats = (recorrerUserStats, progress, courses) => {
   // console.log(users,progress,courses);
-  let recorrerUserStats = users.filter(elementUser => elementUser.role === 'student');
-  //console.log(recorrerUserStats);
 
-const userWithStats =[];
+  console.log(recorrerUserStats);
+
+// const userWithStats =[];
 
   //Función para obtener progreso y demás datos de 'exercises'
   const percentUsers = (recorrerUserStats) => {
@@ -28,7 +28,7 @@ const userWithStats =[];
  
   const objectExercise = (recorrerUserStats) => {
     let contadorTotal = 0;
-    let contadorCompleted = 0
+    let contadorCompleted = 0;
     courses.forEach(course1 => {
       const progressUsers = progress[recorrerUserStats.id];
       if (progressUsers && Object.keys(progressUsers).length > 0 && !Array.isArray(progressUsers)) {
@@ -131,11 +131,11 @@ const userWithStats =[];
         quiz: objectQuizz(objectUser)
       }
     }
-    //console.log(userWithStats);
+    console.log(userWithStats);
     return userWithStats;
   })
   // console.log(recorrerUserStats);
-// console.log(recorrerUserStats);
+console.log(recorrerUserStats);
 
   return recorrerUserStats;
 };

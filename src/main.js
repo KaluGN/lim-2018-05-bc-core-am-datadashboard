@@ -73,7 +73,8 @@ const llamadoUser = (event) => {
   //console.log(event.target.responseText);
   const dataUser = JSON.parse(event.target.responseText);
   //console.log(dataUser);
-  options.cohortData.users = dataUser;
+  let recorrerUserStats = dataUser.filter(elementUser => elementUser.role === 'student');
+  options.cohortData.users = recorrerUserStats;
 
 }
   //console.log(options);

@@ -21,7 +21,7 @@ describe('data', () => {
     const cohort = fixtures.cohorts.find(item => item.id === 'lim-2018-03-pre-core-pw');
     const courses = Object.keys(cohort.coursesIndex);
     const { users, progress } = fixtures;
-
+    
     it('debería retornar arreglo de usuarios con propiedad stats', () => {
       const processed = computeUsersStats(users, progress, courses);
 
@@ -37,13 +37,13 @@ describe('data', () => {
     });
 
     describe('user.stats para el primer usuario en data de prueba - ver carpeta data/', () => {
-
+     
       const processed = computeUsersStats(users, progress, courses);
 
       it(
-        'debería tener propiedad percent con valor 53',
-        () => assert.equal(processed[0].stats.percent, 53)
-      );
+        'debería tener propiedad percent con valor 53', () => {
+          assert.equal(processed[0].stats.percent, 53);
+        });
 
       it('debería tener propiedad exercises con valor {total: 2, completed: 0, percent: 0}', () => {
         assert.deepEqual(processed[0].stats.exercises, {
@@ -58,6 +58,7 @@ describe('data', () => {
           total: 3,
           completed: 2,
           percent: 67,
+          scoreSum: 57,
           scoreAvg: 29,
         });
       });
