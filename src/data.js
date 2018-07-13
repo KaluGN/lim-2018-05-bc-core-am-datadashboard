@@ -8,7 +8,7 @@ const resultdiv = (a,b) => {
 window.computeUsersStats = (recorrerUserStats, progress, courses) => {
   // console.log(users,progress,courses);
 
-  console.log(recorrerUserStats);
+  // console.log(recorrerUserStats);
 
 // const userWithStats =[];
 
@@ -99,7 +99,7 @@ window.computeUsersStats = (recorrerUserStats, progress, courses) => {
           const parts = Object.values(partsUnits.parts)
           for (let part in parts) {
             // console.log(parts[part]['type']);
-            if (parts[part]['type'] === "quiz") {
+            if (parts[part]['type'] === "quizzes") {
               contadorTotal++
               if (parts[part]['completed'] === 1) {
                 contadorCompleted++
@@ -128,14 +128,14 @@ window.computeUsersStats = (recorrerUserStats, progress, courses) => {
         percent: percentUsers(objectUser),
         exercises: objectExercise(objectUser),
         reads: objectReads(objectUser),
-        quiz: objectQuizz(objectUser)
+        quizzes: objectQuizz(objectUser)
       }
     }
-    console.log(userWithStats);
+    // console.log(userWithStats);
     return userWithStats;
   })
-  // console.log(recorrerUserStats);
-console.log(recorrerUserStats);
+  console.log(recorrerUserStats[0]);
+// console.log(recorrerUserStats);
 
   return recorrerUserStats;
 };
@@ -187,22 +187,22 @@ window.sortUsers = (users, orderBy, orderDirection) => {
     return orderNew;
   } else if (orderBy === 'quiz' && orderDirection === 'asc') {
     const orderNew = users.sort (function (a, b) {
-      return a.stats.quiz.completed - b.stats.quiz.completed
+      return a.stats.quizzes.completed - b.stats.quizzes.completed
     });
     return orderNew;
   } else if (orderBy === 'quiz' && orderDirection === 'dsc') {
     const orderNew = users.sort (function (a, b) {
-      return b.stats.quiz.completed - a.stats.quiz.completed
+      return b.stats.quizzes.completed - a.stats.quizzes.completed
     });
     return orderNew;
   } else if (orderBy === 'quizzesAvg' && orderDirection === 'asc') {
     const orderNew = users.sort (function (a, b) {
-      return a.stats.quiz.scoreAvg - b.stats.quiz.scoreAvg
+      return a.stats.quizzes.scoreAvg - b.stats.quizzes.scoreAvg
     });
     return orderNew;
   } else if (orderBy === 'quizzesAvg' && orderDirection === 'dsc') {
     const orderNew = users.sort (function (a, b) {
-      return b.stats.quiz.scoreAvg - a.stats.quiz.scoreAvg
+      return b.stats.quizzes.scoreAvg - a.stats.quizzes.scoreAvg
     });
     return orderNew;
   }

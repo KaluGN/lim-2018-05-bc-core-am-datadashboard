@@ -47,7 +47,7 @@ const viewUser = (nuevoUsers) => {
       'Progreso general: ' + elementUser.stats.percent +'\n'+ 
       '% de ejercicios: ' + elementUser.stats.exercises.percent +'\n'+
       '% de lecturas: ' + elementUser.stats.reads.percent +'\n'+
-      '% de quiz: ' + elementUser.stats.quiz.percent
+      '% de quizzes: ' + elementUser.stats.quizzes.percent
     }</p>`;
 
    

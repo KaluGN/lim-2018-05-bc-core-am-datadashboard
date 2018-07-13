@@ -27,6 +27,7 @@ describe('data', () => {
 
       assert.equal(users.length, processed.length);
 
+      console.log(processed[0]);
       processed.forEach(user => {
         assert.ok(user.hasOwnProperty('stats'));
         assert.isNumber(user.stats.percent);
