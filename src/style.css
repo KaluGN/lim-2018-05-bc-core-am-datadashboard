@@ -4,37 +4,7 @@ body {
   margin: 1px;
  }
 
-@media screen and (max-width: 380px) {
-  .header {
-    width: 100%;
-  }
-  .logo {
-    width: 65%
-  }
-  .avatar {
-    width: 20%;
-    display: inline-block;
-    /* float: right; */
-  }
-  
-  .sede {
-    width: 100%;
-  }
-  #selector-cohort {
-    width: 100%;
-  }
-  .select {
-    width: 100%
-  }
- }
-
-@media screen and (max-width: 400px) {
-
-  .elegir-data {
-    width: 100%;
-  }
-}
-
+ 
 
 .header {
   height: 60px;
@@ -82,6 +52,7 @@ body {
 
 .select { 
   padding: 3px;
+  width: 200px;
  }
 
 #selectores {
@@ -113,8 +84,6 @@ display: inline;
   width: 100%;
   height: 10%;
   padding: 3px;
-  background-color: #ffffffce; 
-  border: yellow;
   display: inline-block;
   white-space: pre-line;
   }
@@ -133,3 +102,28 @@ footer {
   height: 4%;
   width: 100%;
 }
+
+
+@media screen and (max-width: 380px) {
+  .header {
+    width: 100%;
+  }
+  .logo {
+    width: 65%
+  }
+  .avatar {
+    width: 20%;
+    display: inline-block;
+    /* float: right; */
+  }
+  
+  .sede {
+    width: 100%;
+  }
+  #selector-cohort {
+    width: 100%;
+  }
+  .select {
+    width: 100%
+  }
+ }

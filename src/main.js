@@ -122,7 +122,7 @@ const mostrarCohorts = (cohorts) => {
 searchStudent.addEventListener('keyup', function () {
   options.search = searchStudent.value;
   let data = processCohortData(options);
-  console.log(data);
+  //console.log(data);
   
   addUsers.innerHTML = '';
   // console.log(showUser(data));
