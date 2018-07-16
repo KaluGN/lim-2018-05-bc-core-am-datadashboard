@@ -109,6 +109,18 @@ display: inline;
   display: inline;
 }
 
+.student-data {
+  width: 100%;
+  height: 10%;
+  padding: 3px;
+  background-color: #ffffffce; 
+  border: yellow;
+  display: inline-block;
+  white-space: pre-line;
+  }
+  
+  
+
 footer {
   font-size: 70%;
   text-align: center;
