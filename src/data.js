@@ -5,12 +5,12 @@ const resultdiv = (a,b) => {
 }
 
 //////AQUI VA LO DE DATA
-window.computeUsersStats = (users, progress, courses) => {
+window.computeUsersStats = (recorrerUserStats, progress, courses) => {
   // console.log(users,progress,courses);
-  let recorrerUserStats = users.filter(elementUser => elementUser.role === 'student');
-  //console.log(recorrerUserStats);
 
-const userWithStats =[];
+  // console.log(recorrerUserStats);
+
+// const userWithStats =[];
 
   //Función para obtener progreso y demás datos de 'exercises'
   const percentUsers = (recorrerUserStats) => {
@@ -28,7 +28,7 @@ const userWithStats =[];
  
   const objectExercise = (recorrerUserStats) => {
     let contadorTotal = 0;
-    let contadorCompleted = 0
+    let contadorCompleted = 0; //segun test aquí hay un error
     courses.forEach(course1 => {
       const progressUsers = progress[recorrerUserStats.id];
       if (progressUsers && Object.keys(progressUsers).length > 0 && !Array.isArray(progressUsers)) {
@@ -92,7 +92,7 @@ const userWithStats =[];
     let contadorCompleted = 0;
     let sumaScore = 0;
     courses.forEach(course1 => {
-      const progressUsers = progress[recorrerUserStats.id]; //segun test aquí hay un error
+      const progressUsers = progress[recorrerUserStats.id]; 
       if (progressUsers && Object.keys(progressUsers).length > 0 && !Array.isArray(progressUsers)) {
         const units = Object.values(progressUsers[course1].units)
         units.forEach(partsUnits => {
@@ -112,13 +112,13 @@ const userWithStats =[];
         });
       }
     });
-    const quiz = new Object();
-    quiz.total = contadorTotal,
-      quiz.completed = contadorCompleted,
-      quiz.percent = Math.round(resultdiv(contadorCompleted * 100, contadorTotal)),
-      quiz.scoreSum = sumaScore,
-      quiz.scoreAvg = Math.round(sumaScore / contadorCompleted)
-    return quiz
+    const quizzes = new Object();
+    quizzes.total = contadorTotal,
+    quizzes.completed = contadorCompleted,
+    quizzes.percent = Math.round(resultdiv(contadorCompleted * 100, contadorTotal)),
+    quizzes.scoreSum = sumaScore,
+    quizzes.scoreAvg = Math.round(sumaScore / contadorCompleted)
+    return quizzes
   }
 
   recorrerUserStats = recorrerUserStats.map(objectUser => {
@@ -128,13 +128,13 @@ const userWithStats =[];
         percent: percentUsers(objectUser),
         exercises: objectExercise(objectUser),
         reads: objectReads(objectUser),
-        quiz: objectQuizz(objectUser)
+        quizzes: objectQuizz(objectUser)
       }
     }
-    //console.log(userWithStats);
+    // console.log(userWithStats);
     return userWithStats;
   })
-  // console.log(recorrerUserStats);
+  console.log(recorrerUserStats[0]);
 // console.log(recorrerUserStats);
 
   return recorrerUserStats;
@@ -186,28 +186,28 @@ window.sortUsers = (users, orderBy, orderDirection) => {
     return orderNew;
   } else if (orderBy === 'quiz' && orderDirection === 'asc') {
     const orderNew = users.sort (function (a, b) {
-      return a.stats.quiz.completed - b.stats.quiz.completed
+      return a.stats.quizzes.completed - b.stats.quizzes.completed
     });
     return orderNew;
   } else if (orderBy === 'quiz' && orderDirection === 'dsc') {
     const orderNew = users.sort (function (a, b) {
-      return b.stats.quiz.completed - a.stats.quiz.completed
+      return b.stats.quizzes.completed - a.stats.quizzes.completed
     });
     return orderNew;
   } else if (orderBy === 'quizzesAvg' && orderDirection === 'asc') {
     const orderNew = users.sort (function (a, b) {
-      return a.stats.quiz.scoreAvg - b.stats.quiz.scoreAvg
+      return a.stats.quizzes.scoreAvg - b.stats.quizzes.scoreAvg
     });
     return orderNew;
   } else if (orderBy === 'quizzesAvg' && orderDirection === 'dsc') {
     const orderNew = users.sort (function (a, b) {
-      return b.stats.quiz.scoreAvg - a.stats.quiz.scoreAvg
+      return b.stats.quizzes.scoreAvg - a.stats.quizzes.scoreAvg
     });
     return orderNew;
   }
 
 
-   return users.sort(); 
+  //  return users.sort(); 
 }
 
 
@@ -230,10 +230,10 @@ window.processCohortData = (options) => {
   estudents = sortUsers(estudents, options.orderBy, options.orderDirection);
   //console.log(estudents);
 
-  if (options.search !== '') {
+  if (options.search !== '') { //segun test aquí hay un error
     estudents = filterUsers(estudents, options.search) //segun test aquí hay un error
   }
   //console.log(estudents); //segun test aquí hay un error
 
-  return estudents; //segun test aquí hay un error
+  return estudents; 
 }
